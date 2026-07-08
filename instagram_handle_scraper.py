@@ -54,6 +54,32 @@ HTTPX_TIMEOUT = 20.0        # Sekunden pro httpx-Request
 PLAYWRIGHT_TIMEOUT = 30000  # Millisekunden pro Playwright-Navigation
 REQUEST_PAUSE = 0.5         # kleine Pause zwischen Domains (hoeflich)
 
+
+def _detect_ca_bundle() -> str | None:
+    """CA-Bundle finden, falls hinter einem TLS-terminierenden Proxy gearbeitet
+    wird (z.B. Cloud-Umgebungen). Gibt Pfad zurueck oder None (dann System-CAs)."""
+    for var in ("SSL_CERT_FILE", "REQUESTS_CA_BUNDLE", "CURL_CA_BUNDLE"):
+        p = os.environ.get(var)
+        if p and os.path.exists(p):
+            return p
+    default = "/root/.ccr/ca-bundle.crt"
+    if os.path.exists(default):
+        return default
+    return None
+
+
+def _detect_proxy() -> str | None:
+    """Ausgehenden HTTPS-Proxy aus der Umgebung lesen, sonst None."""
+    for var in ("HTTPS_PROXY", "https_proxy", "HTTP_PROXY", "http_proxy"):
+        p = os.environ.get(var)
+        if p:
+            return p
+    return None
+
+
+CA_BUNDLE = _detect_ca_bundle()
+PROXY_URL = _detect_proxy()
+
 # Instagram-Pfade, die keine Handles sind und rausgefiltert werden.
 RESERVED_SLUGS = {"p", "reel", "reels", "explore", "tv", "stories"}
 
@@ -118,7 +144,10 @@ def fetch_httpx(url: str) -> str | None:
             headers=headers,
             timeout=HTTPX_TIMEOUT,
             follow_redirects=True,
-            verify=True,
+            # Hinter einem TLS-terminierenden Proxy muss dessen CA-Bundle
+            # vertraut werden; ohne Proxy sind es die System-CAs (True).
+            verify=CA_BUNDLE or True,
+            trust_env=True,  # nutzt HTTPS_PROXY/NO_PROXY aus der Umgebung
         ) as client:
             resp = client.get(url)
             if resp.status_code >= 400:
@@ -137,11 +166,16 @@ def fetch_playwright(url: str) -> str | None:
         print(f"    [playwright] nicht verfuegbar: {exc}", file=sys.stderr)
         return None
 
+    # Proxy an Chromium durchreichen, falls die Umgebung einen setzt.
+    launch_kwargs: dict = {"headless": True}
+    if PROXY_URL:
+        launch_kwargs["proxy"] = {"server": PROXY_URL}
+
     def _launch(pw):
         """Chromium starten; bei Versions-Mismatch auf ein vorinstalliertes
         Binary unter PLAYWRIGHT_BROWSERS_PATH ausweichen."""
         try:
-            return pw.chromium.launch(headless=True)
+            return pw.chromium.launch(**launch_kwargs)
         except Exception:  # noqa: BLE001
             base = os.environ.get("PLAYWRIGHT_BROWSERS_PATH", "/opt/pw-browsers")
             for pat in (
@@ -150,7 +184,9 @@ def fetch_playwright(url: str) -> str | None:
             ):
                 for exe in sorted(glob.glob(pat)):
                     if os.path.exists(exe):
-                        return pw.chromium.launch(headless=True, executable_path=exe)
+                        return pw.chromium.launch(
+                            executable_path=exe, **launch_kwargs
+                        )
             raise
 
     try:
