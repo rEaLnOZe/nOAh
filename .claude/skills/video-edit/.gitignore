@@ -1,0 +1,8 @@
+# Python virtualenv created by scripts/setup.sh (whisperx)
+.venv/
+
+# Per-workdir render caches / transcripts live outside the repo
+# (~/.cache/video-edit) but ignore any stray local caches too.
+.cache/
+*.pyc
+__pycache__/
