@@ -1,0 +1,106 @@
+<!--
+  viral-broll · TEXT-CENTERED template (clean viral style)
+  Target look: assets/reference-frames/03-text-centered_hesitation.png
+  Also the default for HOOKS and CTAs (detection.md).
+
+  Fill the PLACEHOLDERS:
+    --accent / --accent-dark  → emotional/topic accent (default brand orange)
+    .line spans               → the phrase, stacked; vary size/weight per line
+    <em>                      → the ONE accent word (italic + accent color)
+    .prop img                 → 1–2 emotion props (clock=urgency, trophy=win…)
+    .watermark                → the key word, huge + faint, behind
+-->
+<div class="stage">
+  <div class="card" id="card">
+    <div class="bg"></div>
+    <div class="sheen"></div>
+
+    <div class="watermark">OPPORTUNITY</div>
+
+    <!-- diagonal urgency ribbon (optional; swap text or remove) -->
+    <div class="ribbon">KEEP OUT · DON'T TOUCH · KEEP OUT · DON'T TOUCH ·</div>
+
+    <!-- emotion props -->
+    <img class="prop prop-tl" src="PROP_TOP_LEFT.png" alt="">
+    <img class="prop prop-b"  src="PROP_BOTTOM.png"  alt="">
+
+    <!-- HERO: the phrase, stacked with size/weight contrast, one accent word -->
+    <div class="phrase" id="phrase">
+      <span class="line l1">Hesitation</span>
+      <span class="line l2">STEALS <span class="thin">your</span></span>
+      <span class="line l3">BIGGEST</span>
+      <span class="line l4"><em>opportunities</em></span>
+    </div>
+  </div>
+</div>
+
+<style>
+  :root{
+    --accent:#FF7A00; --accent-dark:#FF3B00;
+    --ink:#141414; --ink-soft:#333; --paper:#F6F5F3; --wm:#B8B8B8;
+  }
+  .stage{position:absolute;inset:0;background:#0b0b0d;display:grid;place-items:center;}
+  .card{position:relative;width:1080px;height:1920px;overflow:hidden;border-radius:36px;
+    background:var(--paper);
+    box-shadow:22px 28px 0 -6px color-mix(in srgb,var(--accent) 45%, transparent),
+               0 40px 120px rgba(0,0,0,.45);
+    outline:2px solid color-mix(in srgb,var(--accent) 55%, transparent);outline-offset:-2px;
+    filter:contrast(1.03) saturate(1.05);}
+  .bg{position:absolute;inset:0;
+    background:
+      radial-gradient(120% 90% at 15% 10%, rgba(0,0,0,.12), transparent 45%),
+      radial-gradient(120% 90% at 85% 94%, rgba(0,0,0,.10), transparent 45%),
+      var(--paper);filter:blur(2px);}
+  .sheen{position:absolute;inset:0;pointer-events:none;
+    background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.5) 48%,transparent 62%);}
+
+  .watermark{position:absolute;inset:0;display:grid;place-items:center;
+    font-family:"Archivo Black","SF Pro Display",system-ui,sans-serif;font-weight:900;
+    font-size:300px;line-height:.86;letter-spacing:-6px;color:var(--wm);opacity:.14;}
+
+  .ribbon{position:absolute;top:44%;left:-10%;width:120%;transform:rotate(-14deg);
+    white-space:nowrap;overflow:hidden;font-family:"SF Pro Display",system-ui,sans-serif;
+    font-weight:800;letter-spacing:6px;font-size:34px;color:#fff;
+    background:repeating-linear-gradient(90deg,var(--ink) 0 6px,transparent 6px 12px) center/100% 2px no-repeat;
+    padding:14px 0;text-shadow:0 0 1px var(--ink);opacity:.9;
+    -webkit-text-stroke:1px var(--ink);}
+
+  .prop{position:absolute;width:300px;filter:drop-shadow(0 18px 26px rgba(0,0,0,.25));}
+  .prop-tl{top:-30px;left:-20px;transform:rotate(-8deg);}
+  .prop-b{bottom:-40px;left:50%;transform:translateX(-50%) rotate(4deg);width:340px;}
+
+  .phrase{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;
+    align-items:center;gap:6px;text-align:center;
+    font-family:"SF Pro Display",system-ui,sans-serif;color:var(--ink);text-transform:none;}
+  .line{display:block;font-weight:900;line-height:.92;letter-spacing:-2px;}
+  .l1{font-size:120px;font-weight:800;}
+  .l2{font-size:150px;}
+  .l2 .thin{font-weight:500;font-style:italic;font-size:96px;color:var(--ink-soft);}
+  .l3{font-size:190px;}
+  .l4 em{font-style:italic;font-weight:800;font-size:160px;
+    color:var(--accent);text-shadow:0 6px 24px color-mix(in srgb,var(--accent) 35%,transparent);}
+</style>
+
+<script>
+  /* Single seek-safe timeline — adapt wiring to hyperframes-core. ~3.8s. */
+  const tl = gsap.timeline({ paused:true, defaults:{ ease:"power3.out" } });
+
+  tl.from("#card", { filter:"blur(20px)", scale:0.96, duration:0.3, ease:"power2.out" }, 0);
+  tl.from(".watermark", { opacity:0, scale:1.08, duration:0.8 }, 0.15);
+
+  // words reveal in reading order (mask-rise), the accent word punches
+  tl.from(".line", { yPercent:120, opacity:0, duration:0.5, stagger:0.14 }, 0.25);
+  tl.fromTo(".l4 em", { scale:0.9 }, { scale:1.06, duration:0.45, ease:"back.out(2)" }, "-=0.2");
+  tl.to(".l4 em", { scale:1.0, duration:0.3 }, ">");
+
+  tl.from(".ribbon", { xPercent:-20, opacity:0, duration:0.6 }, 0.4);
+  tl.from(".prop-tl", { x:-120, y:-80, opacity:0, duration:0.6 }, 0.5);
+  tl.from(".prop-b",  { y:120,  opacity:0, duration:0.6 }, 0.65);
+
+  // settle zoom
+  tl.to("#card", { scale:1.18, rotation:6, transformOrigin:"50% 50%",
+                   duration:1.9, ease:"cubic.out" }, 1.3);
+
+  window.__hf_timeline = tl;
+  window.__hf_duration = 3.8;
+</script>
