@@ -1,0 +1,135 @@
+<!--
+  viral-broll · OBJECT-CENTERED template (clean viral style)
+  Target look: assets/reference-frames/01-object-centered_save-time.png
+
+  This is a STYLE-CORRECT starting point. Before rendering, align the timeline
+  wiring to the current HyperFrames contract (load hyperframes-core) — the CSS
+  ports directly; only the seek/timeline plumbing is framework-specific.
+
+  Fill the PLACEHOLDERS:
+    --accent / --accent-dark  → beat accent (default brand orange below)
+    .watermark text           → the beat's key word(s), huge + faint
+    #hero img src             → the hero object cutout (transparent PNG ideal)
+    .prop img src (x2)        → two related props for opposite corners
+    .hero-word                → optional short label under/over the hero
+-->
+<div class="stage">
+  <div class="card" id="card">
+    <!-- shaded background + light sheen + faint texture -->
+    <div class="bg"></div>
+    <div class="sheen"></div>
+    <div class="halftone"></div>
+
+    <!-- huge faint watermark word behind the hero -->
+    <div class="watermark">SAVE&nbsp;TIME</div>
+
+    <!-- pen-curve texture line -->
+    <svg class="pencurve" viewBox="0 0 1080 1920" preserveAspectRatio="none">
+      <path d="M120,360 C360,240 720,520 980,360" fill="none"
+            stroke="#141414" stroke-opacity="0.25" stroke-width="3"/>
+    </svg>
+
+    <!-- corner props (partly cropped by the card edge) -->
+    <img class="prop prop-tl" src="PROP_TOP_LEFT.png" alt="">
+    <img class="prop prop-br" src="PROP_BOTTOM_RIGHT.png" alt="">
+
+    <!-- HERO: grounding shadow + object -->
+    <div class="hero" id="hero">
+      <img class="hero-shadow" src="HERO_OBJECT.png" alt="">
+      <img class="hero-img"    src="HERO_OBJECT.png" alt="">
+    </div>
+
+    <!-- dash row texture -->
+    <div class="dashes">— — —</div>
+  </div>
+</div>
+
+<style>
+  :root{
+    --accent:#FF7A00;        /* beat accent — default brand orange */
+    --accent-dark:#FF3B00;
+    --ink:#141414;
+    --ink-soft:#333;
+    --paper:#F6F5F3;
+    --wm:#B8B8B8;
+  }
+  .stage{position:absolute;inset:0;background:#0b0b0d;display:grid;place-items:center;}
+  /* 9:16 card */
+  .card{
+    position:relative;width:1080px;height:1920px;overflow:hidden;border-radius:36px;
+    background:var(--paper);
+    /* colored stacked-card drop shadow + accent hairline */
+    box-shadow:24px 30px 0 -6px color-mix(in srgb,var(--accent) 45%, transparent),
+               0 40px 120px rgba(0,0,0,.45);
+    outline:2px solid color-mix(in srgb,var(--accent) 55%, transparent);
+    outline-offset:-2px;
+    filter:contrast(1.03) saturate(1.05);       /* subtle grade */
+  }
+  /* never flat white: shaded corners */
+  .bg{position:absolute;inset:0;
+    background:
+      radial-gradient(120% 90% at 12% 8%, rgba(0,0,0,.12), transparent 45%),
+      radial-gradient(120% 90% at 88% 96%, rgba(0,0,0,.10), transparent 45%),
+      var(--paper);
+    filter:blur(2px);}
+  .sheen{position:absolute;inset:0;pointer-events:none;
+    background:linear-gradient(115deg, transparent 30%, rgba(255,255,255,.55) 48%, transparent 62%);}
+  .halftone{position:absolute;inset:0;opacity:.10;pointer-events:none;
+    background-image:radial-gradient(#141414 1.2px, transparent 1.3px);
+    background-size:16px 16px;-webkit-mask:linear-gradient(#000,transparent 60%);
+            mask:linear-gradient(#000,transparent 60%);}
+
+  .watermark{position:absolute;inset:0;display:grid;place-items:center;
+    font-family:"Archivo Black","SF Pro Display",system-ui,sans-serif;
+    font-weight:900;font-size:360px;line-height:.86;letter-spacing:-6px;
+    color:var(--wm);opacity:.16;text-align:center;white-space:pre-line;}
+
+  .pencurve{position:absolute;inset:0;width:100%;height:100%;}
+
+  .prop{position:absolute;width:300px;filter:drop-shadow(0 20px 30px rgba(0,0,0,.25));}
+  .prop-tl{top:-40px;left:-30px;transform:rotate(-8deg);}
+  .prop-br{bottom:-50px;right:-40px;transform:rotate(6deg);}
+
+  .hero{position:absolute;inset:0;display:grid;place-items:center;}
+  .hero-img{width:620px;max-height:64%;object-fit:contain;
+    filter:drop-shadow(0 8px 12px rgba(0,0,0,.2));}
+  /* grounding shadow: same art, crushed black, heavy blur, offset behind */
+  .hero-shadow{position:absolute;width:620px;max-height:64%;object-fit:contain;
+    filter:brightness(0) blur(90px);opacity:.55;transform:translate(24px,60px) scale(1.02);}
+
+  .dashes{position:absolute;left:0;right:0;bottom:230px;text-align:center;
+    font-family:"SF Pro Display",system-ui,sans-serif;font-weight:800;
+    letter-spacing:14px;color:var(--ink-soft);font-size:44px;}
+</style>
+
+<script>
+  /*
+    Single seek-safe timeline. HyperFrames drives one paused master timeline and
+    seeks it per frame — adapt this to the hyperframes-core contract (data-* / clip
+    wiring). Shown here with GSAP for the choreography (see hyperframes-animation
+    for the exact eases). Times in seconds; total ~4.2s on screen.
+  */
+  const tl = gsap.timeline({ paused:true, defaults:{ ease:"power3.out" } });
+
+  // 1) card in — blur burn-off, no bounce
+  tl.from("#card", { filter:"blur(20px)", scale:0.96, duration:0.3, ease:"power2.out" }, 0);
+
+  // 2) hero zoom-in (60→100) with grounding shadow tracking
+  tl.from("#hero .hero-img, #hero .hero-shadow",
+          { scale:0.6, opacity:0, transformOrigin:"50% 60%", duration:1.0 }, 0.1);
+
+  // 3) supporting reveals, staggered (props slide from their edges, curve wipes, dashes type)
+  tl.from(".prop-tl", { x:-120, y:-80, opacity:0, duration:0.6 }, 0.35);
+  tl.from(".prop-br", { x:120,  y:80,  opacity:0, duration:0.6 }, 0.5);
+  tl.from(".pencurve path", { drawSVG:"0%", duration:0.7, ease:"power2.inOut" }, 0.5);
+  tl.from(".watermark", { opacity:0, scale:1.08, duration:0.8 }, 0.2);
+  tl.from(".dashes", { opacity:0, y:20, duration:0.5 }, 0.8);
+
+  // 4) settle — one final compound zoom (100→120) + slight rotation, cubic ease
+  tl.to("#card", { scale:1.2, rotation:8, transformOrigin:"50% 50%",
+                   duration:2.0, ease:"cubic.out" }, 1.4);
+
+  // HyperFrames: expose the timeline / total duration to the renderer here.
+  window.__hf_timeline = tl;
+  window.__hf_duration = 4.2;
+</script>
