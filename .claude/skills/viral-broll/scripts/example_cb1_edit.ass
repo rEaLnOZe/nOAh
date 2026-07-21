@@ -1,0 +1,47 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+ScaledBorderAndShadow: yes
+WrapStyle: 2
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: WP,Liberation Sans,104,&HFFFFFF&,&HFFFFFF&,&H000000&,&H90000000&,-1,0,0,0,100,100,1,0,1,7,4,5,40,40,60,0
+Style: CARD,Liberation Sans,40,&HFFFFFF&,&HFFFFFF&,&H000000&,&H90000000&,-1,0,0,0,100,100,1,0,1,0,0,7,40,40,60,0
+Style: WM,Liberation Sans,300,&HB8B8B8&,&HB8B8B8&,&H000000&,&H90000000&,-1,0,0,0,100,100,1,0,1,0,0,5,40,40,60,0
+Style: EB,Liberation Sans,48,&H003BFF&,&H003BFF&,&H000000&,&H90000000&,-1,0,0,0,100,100,1,0,1,0,0,5,40,40,60,0
+Style: Q,Liberation Sans,96,&H1A1A1A&,&H1A1A1A&,&H00FFFFFF&,&H90000000&,-1,0,0,0,100,100,1,0,1,0,0,5,40,40,60,0
+Style: BUG,Liberation Sans,44,&H007AFF&,&H007AFF&,&H000000&,&H90000000&,-1,0,0,0,100,100,1,0,1,2,0,7,40,40,60,0
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.00,0:00:01.50,WP,,0,0,0,,{\an5\pos(540,1430)\fs72\fscx82\fscy82\t(0,110,\fscx100\fscy100)\fad(70,60)}{\c&HFFFFFF&}INFLUENCER {\c&HFFFFFF&}MARKETING {\c&HFFFFFF&}HAT
+Dialogue: 9,0:00:00.00,0:00:19.05,BUG,,0,0,0,,{\an7\pos(46,64)\fs44\c&H007AFF&\alpha&H50&\bord2\3c&H000000&}creatr{\c&HFFFFFF&\alpha&H60&}labs
+Dialogue: 0,0:00:01.50,0:00:03.00,WP,,0,0,0,,{\an5\pos(540,1430)\fs73\fscx82\fscy82\t(0,110,\fscx100\fscy100)\fad(70,60)}{\c&H007AFF&}KEIN {\c&H007AFF&}REICHWEITENPROBLEM
+Dialogue: 0,0:00:03.00,0:00:03.57,WP,,0,0,0,,{\an5\pos(540,1430)\fs104\fscx82\fscy82\t(0,110,\fscx100\fscy100)\fad(70,60)}{\c&HFFFFFF&}ES {\c&HFFFFFF&}HAT {\c&HFFFFFF&}EIN
+Dialogue: 0,0:00:03.57,0:00:05.00,WP,,0,0,0,,{\an5\pos(540,1430)\fs83\fscx82\fscy82\t(0,110,\fscx100\fscy100)\fad(70,60)}{\c&H007AFF&}INFRASTRUKTURPROBLEM
+Dialogue: 0,0:00:05.00,0:00:05.62,WP,,0,0,0,,{\an5\pos(540,1430)\fs104\fscx82\fscy82\t(0,110,\fscx100\fscy100)\fad(70,60)}{\c&HFFFFFF&}UND {\c&HFFFFFF&}FAST {\c&H007AFF&}KEINER
+Dialogue: 0,0:00:05.62,0:00:06.00,WP,,0,0,0,,{\an5\pos(540,1430)\fs104\fscx82\fscy82\t(0,110,\fscx100\fscy100)\fad(70,60)}{\c&HFFFFFF&}SIEHT {\c&HFFFFFF&}DAS
+Dialogue: 0,0:00:06.00,0:00:06.44,WP,,0,0,0,,{\an5\pos(540,1430)\fs104\fscx82\fscy82\t(0,110,\fscx100\fscy100)\fad(70,60)}{\c&HFFFFFF&}WIR {\c&HFFFFFF&}TUN {\c&HFFFFFF&}SO
+Dialogue: 0,0:00:06.44,0:00:06.94,WP,,0,0,0,,{\an5\pos(540,1430)\fs104\fscx82\fscy82\t(0,110,\fscx100\fscy100)\fad(70,60)}{\c&HFFFFFF&}ALS {\c&HFFFFFF&}WÄR {\c&HFFFFFF&}DIE
+Dialogue: 0,0:00:06.94,0:00:08.00,WP,,0,0,0,,{\an5\pos(540,1430)\fs83\fscx82\fscy82\t(0,110,\fscx100\fscy100)\fad(70,60)}{\c&HFFFFFF&}FRAGE {\c&H007AFF&}WELCHEN {\c&H007AFF&}CREATOR
+Dialogue: 0,0:00:08.00,0:00:08.65,WP,,0,0,0,,{\an5\pos(540,1430)\fs104\fscx82\fscy82\t(0,110,\fscx100\fscy100)\fad(70,60)}{\c&HFFFFFF&}BUCH {\c&HFFFFFF&}ICH {\c&HFFFFFF&}ABER
+Dialogue: 0,0:00:08.65,0:00:09.18,WP,,0,0,0,,{\an5\pos(540,1430)\fs104\fscx82\fscy82\t(0,110,\fscx100\fscy100)\fad(70,60)}{\c&HFFFFFF&}DAS {\c&HFFFFFF&}IST {\c&HFFFFFF&}DER
+Dialogue: 0,0:00:09.18,0:00:10.00,WP,,0,0,0,,{\an5\pos(540,1430)\fs104\fscx82\fscy82\t(0,110,\fscx100\fscy100)\fad(70,60)}{\c&H007AFF&}EINFACHSTE {\c&HFFFFFF&}TEIL
+Dialogue: 0,0:00:10.00,0:00:10.49,WP,,0,0,0,,{\an5\pos(540,1430)\fs104\fscx82\fscy82\t(0,110,\fscx100\fscy100)\fad(70,60)}{\c&HFFFFFF&}DEN {\c&HFFFFFF&}LÖST {\c&HFFFFFF&}DU
+Dialogue: 0,0:00:10.49,0:00:11.19,WP,,0,0,0,,{\an5\pos(540,1430)\fs104\fscx82\fscy82\t(0,110,\fscx100\fscy100)\fad(70,60)}{\c&HFFFFFF&}MIT {\c&H007AFF&}ZWEI {\c&H007AFF&}KLICKS
+Dialogue: 0,0:00:11.19,0:00:12.00,WP,,0,0,0,,{\an5\pos(540,1430)\fs103\fscx82\fscy82\t(0,110,\fscx100\fscy100)\fad(70,60)}{\c&HFFFFFF&}DIE {\c&H007AFF&}ECHTEN {\c&H007AFF&}FRAGEN
+Dialogue: 0,0:00:12.00,0:00:13.00,WP,,0,0,0,,{\an5\pos(540,1430)\fs103\fscx82\fscy82\t(0,110,\fscx100\fscy100)\fad(70,60)}{\c&HFFFFFF&}DIE {\c&HFFFFFF&}KOMMEN {\c&H007AFF&}DANACH
+Dialogue: 2,0:00:13.00,0:00:16.80,CARD,,0,0,0,,{\an7\pos(0,0)\p1\c&HF3F5F6&\bord0\shad0\fad(160,180)}m 0 0 l 1080 0 l 1080 1920 l 0 1920
+Dialogue: 2,0:00:13.00,0:00:16.80,CARD,,0,0,0,,{\an7\pos(-120,-160)\p1\c&H000000&\alpha&HE6&\bord0\shad0\blur40\fad(160,180)}m 0 0 l 620 0 l 620 620 l 0 620
+Dialogue: 2,0:00:13.00,0:00:16.80,CARD,,0,0,0,,{\an7\pos(580,1400)\p1\c&H000000&\alpha&HEC&\bord0\shad0\blur40\fad(160,180)}m 0 0 l 620 0 l 620 620 l 0 620
+Dialogue: 3,0:00:13.00,0:00:16.80,WM,,0,0,0,,{\an5\pos(540,960)\fs300\c&HB8B8B8&\alpha&HDA&\fscx100\fscy100\fad(180,180)}FRAGEN
+Dialogue: 4,0:00:13.00,0:00:16.80,EB,,0,0,0,,{\an5\pos(540,560)\fs48\c&H003BFF&\bord0\fad(200,160)}◆  DIE ECHTEN FRAGEN  ◆
+Dialogue: 5,0:00:13.15,0:00:16.80,Q,,0,0,0,,{\an5\pos(540,820)\fs100\c&H1A1A1A&\fscx86\fscy86\t(0,140,\fscx100\fscy100)\fad(120,140)}Wird {\c&H007AFF&}geliefert?{\c&H1A1A1A&}
+Dialogue: 5,0:00:14.25,0:00:16.80,Q,,0,0,0,,{\an5\pos(540,1010)\fs81\c&H1A1A1A&\fscx86\fscy86\t(0,140,\fscx100\fscy100)\fad(120,140)}Ist mein Geld {\c&H007AFF&}sicher?{\c&H1A1A1A&}
+Dialogue: 5,0:00:15.35,0:00:16.80,Q,,0,0,0,,{\an5\pos(540,1200)\fs70\c&H1A1A1A&\fscx86\fscy86\t(0,140,\fscx100\fscy100)\fad(120,140)}Ist die Reichweite {\c&H007AFF&}echt?{\c&H1A1A1A&}
+Dialogue: 0,0:00:16.90,0:00:17.28,WP,,0,0,0,,{\an5\pos(540,1430)\fs104\fscx82\fscy82\t(0,110,\fscx100\fscy100)\fad(70,60)}{\c&HFFFFFF&}UND {\c&HFFFFFF&}GENAU {\c&HFFFFFF&}DA
+Dialogue: 0,0:00:17.28,0:00:18.00,WP,,0,0,0,,{\an5\pos(540,1430)\fs83\fscx82\fscy82\t(0,110,\fscx100\fscy100)\fad(70,60)}{\c&H007AFF&}BRICHT {\c&HFFFFFF&}ALLES {\c&H007AFF&}ZUSAMMEN
+Dialogue: 0,0:00:18.00,0:00:18.67,WP,,0,0,0,,{\an5\pos(540,1430)\fs104\fscx82\fscy82\t(0,110,\fscx100\fscy100)\fad(70,60)}{\c&HFFFFFF&}WEIL {\c&HFFFFFF&}SICH {\c&H007AFF&}KEINER
+Dialogue: 0,0:00:18.67,0:00:19.05,WP,,0,0,0,,{\an5\pos(540,1430)\fs104\fscx82\fscy82\t(0,110,\fscx100\fscy100)\fad(70,60)}{\c&HFFFFFF&}DRAN {\c&HFFFFFF&}HÄLT

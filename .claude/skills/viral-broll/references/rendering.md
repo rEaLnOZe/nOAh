@@ -34,6 +34,14 @@ preinstalled Chromium in new-headless mode (the same fix used for Remotion:
 `--chrome-mode=chrome-for-testing --browser-executable=/opt/pw-browsers/chromium`,
 or the equivalent HyperFrames flag). Verify with a one-frame render before a batch.
 
+**No-browser fallback (ffmpeg + libass):** when the browser render can't be made
+to work at all (fully sandboxed host), render the whole edit — word-punch
+captions, a text-centered card, zoom punches, brand bug — with only ffmpeg +
+libass. See `scripts/README.md` and the working `scripts/example_cb1_build_edit.py`
+reference. Lower fidelity than the HTML cards (no true blur/gradient/GSAP), but it
+ships a clean, on-brand cut with zero browser and zero network — this is how CB1
+was cut.
+
 ## Compose onto the edit
 
 - **Full-frame cutaway:** drop the MP4 in at the beat's `start_s…end_s`, replacing
